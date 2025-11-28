@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "rust-lang.rust-analyzer",
+    "tamasfe.even-better-toml",
+    "fill-labs.dependi",
+    "ms-vscode.cpptools-extension-pack",
+    "seaube.clangformat",
+    "vadimcn.vscode-lldb",
+    "esbenp.prettier-vscode",
+    "ryanluker.vscode-coverage-gutters"
+  ]
+}

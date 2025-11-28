@@ -1,0 +1,13 @@
+{
+  "editor.formatOnSave": true,
+  "rust-analyzer.checkOnSave": true,
+  "rust-analyzer.testExplorer": true,
+  "coverage-gutters.showGutterCoverage": false,
+  "coverage-gutters.showLineCoverage": true,
+  "coverage-gutters.watchOnActivate": true,
+  "rust-analyzer.check.command": "clippy",
+  "files.exclude": {
+    "**/Cargo.lock": true,
+    "**/target": true
+  }
+}
