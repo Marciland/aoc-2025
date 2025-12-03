@@ -13,5 +13,9 @@ pub fn fetch_aoc_input(day: u8) -> String {
         .send()
         .expect("Failed to fetch input");
 
-    response.text().expect("Failed to read response text")
+    response
+        .text()
+        .expect("Failed to read response text")
+        .trim()
+        .to_string()
 }
