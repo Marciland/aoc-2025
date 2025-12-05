@@ -1,5 +1,6 @@
 use aoc_2025::fetch_aoc_input;
 use criterion::{Criterion, criterion_group, criterion_main};
+use itertools::Itertools;
 use std::ops::RangeInclusive;
 
 struct Database {
@@ -48,8 +49,10 @@ fn part1(input: &str) -> u64 {
     result
 }
 
-const fn part2(_input: &str) {
-    //
+fn part2(input: &str) -> u64 {
+    let database = parse_input(input);
+
+    database.ranges.into_iter().flatten().unique().count() as u64
 }
 
 fn bench_part1(c: &mut Criterion) {
@@ -62,10 +65,10 @@ fn bench_part1(c: &mut Criterion) {
 }
 
 fn bench_part2(c: &mut Criterion) {
-    // let input = fetch_aoc_input(5);
-    let input = include_str!("5.txt").to_string();
-    // let result = part2(&input);
-    // println!("day5 part2 result: {result}");
+    let input = fetch_aoc_input(5);
+
+    let result = part2(&input);
+    println!("day5 part2 result: {result}");
 
     c.bench_function("day5 part2", |b| b.iter(|| part2(&input)));
 }
