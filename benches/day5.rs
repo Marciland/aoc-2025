@@ -1,6 +1,5 @@
 use aoc_2025::fetch_aoc_input;
 use criterion::{Criterion, criterion_group, criterion_main};
-use itertools::Itertools;
 use std::ops::RangeInclusive;
 
 struct Database {
@@ -50,9 +49,36 @@ fn part1(input: &str) -> u64 {
 }
 
 fn part2(input: &str) -> u64 {
-    let database = parse_input(input);
+    let mut database = parse_input(input);
+    database.ranges.sort_by(|a, b| a.start().cmp(b.start()));
+    database.ranges.reverse();
 
-    database.ranges.into_iter().flatten().unique().count() as u64
+    let mut result = 0;
+
+    let mut continous: Vec<RangeInclusive<u64>> = Vec::new();
+    'outer: loop {
+        let Some(popped) = database.ranges.pop() else {
+            break;
+        };
+
+        let (mut start, end) = (*popped.start(), *popped.end());
+        for range in &continous {
+            if range.contains(&start) {
+                start = range.end() + 1;
+            }
+            if start > end {
+                continue 'outer;
+            }
+        }
+
+        continous.push(start..=end);
+    }
+
+    for range in continous {
+        result += range.end() - range.start() + 1;
+    }
+
+    result
 }
 
 fn bench_part1(c: &mut Criterion) {
