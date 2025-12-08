@@ -1,51 +1,6 @@
-use aoc_2025::fetch_aoc_input;
+use aoc_2025::{Pos2D, fetch_aoc_input};
 use criterion::{Criterion, criterion_group, criterion_main};
 use std::collections::HashMap;
-
-#[derive(Eq, PartialEq, Hash, Clone)]
-struct Pos2D {
-    x: i32,
-    y: i32,
-}
-
-impl Pos2D {
-    fn neighbours(&self) -> Vec<Self> {
-        vec![
-            Self {
-                x: self.x - 1,
-                y: self.y - 1,
-            },
-            Self {
-                x: self.x,
-                y: self.y - 1,
-            },
-            Self {
-                x: self.x + 1,
-                y: self.y - 1,
-            },
-            Self {
-                x: self.x - 1,
-                y: self.y,
-            },
-            Self {
-                x: self.x + 1,
-                y: self.y,
-            },
-            Self {
-                x: self.x - 1,
-                y: self.y + 1,
-            },
-            Self {
-                x: self.x,
-                y: self.y + 1,
-            },
-            Self {
-                x: self.x + 1,
-                y: self.y + 1,
-            },
-        ]
-    }
-}
 
 fn paper_neighbours(grid: &HashMap<Pos2D, bool>, pos: &Pos2D) -> usize {
     pos.neighbours()

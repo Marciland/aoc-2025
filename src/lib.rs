@@ -19,3 +19,73 @@ pub fn fetch_aoc_input(day: u8) -> String {
         .trim()
         .to_string()
 }
+
+#[derive(Eq, PartialEq, Hash, Clone, Debug)]
+pub struct Pos2D {
+    pub x: i32,
+    pub y: i32,
+}
+
+impl Pos2D {
+    #[must_use]
+    pub fn neighbours(&self) -> Vec<Self> {
+        vec![
+            Self {
+                x: self.x - 1,
+                y: self.y - 1,
+            },
+            Self {
+                x: self.x,
+                y: self.y - 1,
+            },
+            Self {
+                x: self.x + 1,
+                y: self.y - 1,
+            },
+            Self {
+                x: self.x - 1,
+                y: self.y,
+            },
+            Self {
+                x: self.x + 1,
+                y: self.y,
+            },
+            Self {
+                x: self.x - 1,
+                y: self.y + 1,
+            },
+            Self {
+                x: self.x,
+                y: self.y + 1,
+            },
+            Self {
+                x: self.x + 1,
+                y: self.y + 1,
+            },
+        ]
+    }
+
+    #[must_use]
+    pub const fn left(&self) -> Self {
+        Self {
+            x: self.x - 1,
+            y: self.y,
+        }
+    }
+
+    #[must_use]
+    pub const fn right(&self) -> Self {
+        Self {
+            x: self.x + 1,
+            y: self.y,
+        }
+    }
+
+    #[must_use]
+    pub const fn below(&self) -> Self {
+        Self {
+            x: self.x,
+            y: self.y + 1,
+        }
+    }
+}
