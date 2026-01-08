@@ -74,8 +74,47 @@ fn part1(input: &str) -> u64 {
     result
 }
 
-const fn part2(_input: &str) {
-    //
+#[allow(unused_variables)]
+fn parse_input_v2(input: &str) -> Vec<Problem> {
+    let lines: Vec<Vec<char>> = input.split('\n').map(|l| l.chars().collect()).collect();
+
+    let mut problems: Vec<Problem> = Vec::new();
+    for _ in lines.last().unwrap().iter().filter(|c| !c.is_whitespace()) {
+        problems.push(Problem {
+            numbers: Vec::with_capacity(lines.len() - 1),
+            operator: String::new(),
+        });
+    }
+
+    let mut next_operator = 0;
+    for (y_index, line) in lines.iter().enumerate() {
+        for (x_index, char) in line.iter().enumerate() {
+            if char.is_whitespace() {
+                continue;
+            }
+            if y_index == lines.len() - 1 {
+                problems[next_operator].operator = char.to_string();
+                next_operator += 1;
+            } else {
+                // TODO
+                // problems[x_index].numbers.push(char.parse().unwrap());
+            }
+        }
+    }
+
+    problems
+}
+
+fn part2(input: &str) -> u64 {
+    let problems = parse_input_v2(input);
+
+    let mut result = 0;
+
+    for problem in problems {
+        result += problem.solve();
+    }
+
+    result
 }
 
 fn bench_part1(c: &mut Criterion) {
